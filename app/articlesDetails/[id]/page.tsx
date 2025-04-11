@@ -1,5 +1,6 @@
 "use client";
 
+import { notFound } from "next/navigation";
 import Data from "@/public/data.json";
 import Image from "next/image";
 
@@ -11,11 +12,10 @@ interface Props {
 
 export default function ArticleDetails({ params }: Props) {
   const { id } = params;
+
   const article = Data.articles.find((a) => a.id === Number(id));
 
-  if (!article) {
-    return <p className="p-6 text-red-500">Article not found.</p>;
-  }
+  if (!article) return notFound();
 
   return (
     <div className="min-h-xl  p-6 max-w-2xl mx-auto">
