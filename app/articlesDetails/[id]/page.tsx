@@ -8,7 +8,7 @@ interface Props {
   };
 }
 
-export default function ArticleDetails({ params }: Props) {
+export default async function ArticleDetails({ params }: Props) {
   const { id } = params;
 
   const article = Data.articles.find((a) => a.id === Number(id));
