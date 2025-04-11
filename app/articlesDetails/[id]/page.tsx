@@ -1,25 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { notFound } from "next/navigation";
+"use client";
+
 import Data from "@/public/data.json";
 import Image from "next/image";
+import { use } from "react";
 
 interface Props {
-  params: {
-    id: any;
-  };
+  params: Promise<{
+    id: string;
+  }>;
 }
 
-export default async function ArticleDetails({ params }: Props) {
-  const { id } = params;
-
+export default function ArticleDetails({ params }: Props) {
+  const { id } = use(params);
   const article = Data.articles.find((a) => a.id === Number(id));
 
-  if (!article) return notFound();
+  if (!article) {
+    return <p className="p-6 text-red-500">Article not found.</p>;
+  }
 
   return (
     <div className="min-h-xl p-6 max-w-2xl mx-auto">
       <Image
-        src={article.imageUrl}
+        src={article.imageUrl || "/placeholder.svg"}
         alt={article.title}
         width={800}
         height={200}
