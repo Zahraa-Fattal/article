@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from "next/navigation";
 import Data from "@/public/data.json";
 import Image from "next/image";
 
 interface Props {
   params: {
-    id: string;
+    id: any;
   };
 }
 
